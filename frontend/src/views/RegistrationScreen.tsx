@@ -1,10 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Form, Input, Card } from 'antd'
-
+import { Typography, Form, Input, Card, Button } from 'antd'
 import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons'
 
+const Logo = require('../images/logo.png')
+const Bg = require('../images/registration-bg.jpg')
+
 const FormItem = Form.Item
+const PasswordInput = Input.Password
 
 const ContainerStyled = styled.div`
   display: flex;
@@ -14,6 +17,13 @@ const ContainerStyled = styled.div`
   width: 100%;
   height: 100vh;
   background-color: ${({ theme }) => theme.colors.primaryAll[1]};
+  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)),
+    url(${Bg});
+`
+const LogoStyled = styled.img`
+  && {
+    margin-bottom: 60px;
+  }
 `
 const FormContainerStyled = styled.div`
   display: flex;
@@ -32,20 +42,33 @@ const RegistrationScreen = (props: RegistrationScreenProps) => {
   // }
   return (
     <ContainerStyled>
+      <LogoStyled src={Logo} />
       <FormContainerStyled>
-        <CardStyled title="Please register:">
+        <CardStyled title="Registration form">
           <Form>
             <FormItem>
               <Input prefix={<UserOutlined />} placeholder="Username" />
             </FormItem>
             <FormItem>
-              <Input prefix={<MailOutlined />} placeholder="E-mail" />
+              <Input
+                type="email"
+                prefix={<MailOutlined />}
+                placeholder="E-mail"
+              />
             </FormItem>
             <FormItem>
-              <Input prefix={<LockOutlined />} placeholder="Password" />
+              <PasswordInput prefix={<LockOutlined />} placeholder="Password" />
             </FormItem>
             <FormItem>
-              <Input prefix={<LockOutlined />} placeholder="Confirm password" />
+              <PasswordInput
+                prefix={<LockOutlined />}
+                placeholder="Confirm password"
+              />
+            </FormItem>
+            <FormItem>
+              <Button type="primary" htmlType="submit">
+                Submit
+              </Button>
             </FormItem>
           </Form>
         </CardStyled>
