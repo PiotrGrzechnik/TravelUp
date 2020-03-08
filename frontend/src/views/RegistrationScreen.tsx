@@ -1,25 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
-import { Typography, Form, Input, Card, Button } from 'antd'
+import { Form, Input, Card, Button } from 'antd'
 import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons'
 
+import WelcomeScreen from '../templates/WelcomeScreen'
+
 const Logo = require('../images/logo.png')
-const Bg = require('../images/registration-bg.jpg')
+const Background = require('../images/registration-bg.jpg')
 
 const FormItem = Form.Item
 const PasswordInput = Input.Password
 
-const ContainerStyled = styled.div`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  width: 100%;
-  height: 100vh;
-  background-color: ${({ theme }) => theme.colors.primaryAll[1]};
-  background: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)),
-    url(${Bg});
-`
 const LogoStyled = styled.img`
   && {
     margin-bottom: 60px;
@@ -41,7 +32,10 @@ const RegistrationScreen = (props: RegistrationScreenProps) => {
   //   console.log(data)
   // }
   return (
-    <ContainerStyled>
+    <WelcomeScreen
+      background={Background}
+      mask="rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)"
+    >
       <LogoStyled src={Logo} />
       <FormContainerStyled>
         <CardStyled title="Registration form">
@@ -73,7 +67,7 @@ const RegistrationScreen = (props: RegistrationScreenProps) => {
           </Form>
         </CardStyled>
       </FormContainerStyled>
-    </ContainerStyled>
+    </WelcomeScreen>
   )
 }
 

@@ -9,7 +9,7 @@ type AppProps = {
 }
 
 const App: React.FC<AppProps> = props => {
-  const { screen = 'registration' } = props
+  const { screen = 'login' } = props
 
   return (
     <Theme>
