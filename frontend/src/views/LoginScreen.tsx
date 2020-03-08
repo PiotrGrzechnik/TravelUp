@@ -21,16 +21,29 @@ const FormContainerStyled = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 400px;
+
+  .ant-form-item-explain::first-letter {
+    text-transform: capitalize;
+  }
 `
-const CardStyled = styled(Card)``
+const ButtonStyled = styled(Button)`
+  width: 100%;
+`
 
 type LoginScreenProps = {}
 
 const LoginScreen = (props: LoginScreenProps) => {
-  const {} = props
-  // const handleSubmit = (data: object) => {
-  //   console.log(data)
-  // }
+  const validateMessages = {
+    required: '${name} is required!',
+  }
+
+  const handleSubmit = (data: object) => {
+    console.log(data)
+  }
+
+  const handleErrors = (data: object) => {
+    console.log(data)
+  }
   return (
     <WelcomeScreen
       background={Background}
@@ -38,21 +51,29 @@ const LoginScreen = (props: LoginScreenProps) => {
     >
       <LogoStyled src={Logo} />
       <FormContainerStyled>
-        <CardStyled title="Login form">
-          <Form>
-            <FormItem>
+        <Card title="Log in to your account">
+          <Form
+            name="login-form"
+            validateMessages={validateMessages}
+            onFinish={handleSubmit}
+            onFinishFailed={handleErrors}
+          >
+            <FormItem name="username" rules={[{ required: true }]}>
               <Input prefix={<UserOutlined />} placeholder="Username" />
             </FormItem>
-            <FormItem>
+            <FormItem name="password" rules={[{ required: true }]}>
               <PasswordInput prefix={<LockOutlined />} placeholder="Password" />
             </FormItem>
             <FormItem>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
+              <ButtonStyled type="primary" htmlType="submit">
+                Log in
+              </ButtonStyled>
+              <span>
+                Or <a href="/registration">register now!</a>
+              </span>
             </FormItem>
           </Form>
-        </CardStyled>
+        </Card>
       </FormContainerStyled>
     </WelcomeScreen>
   )

@@ -1,4 +1,5 @@
 import React from 'react'
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
 import Theme from '../style/theme'
 import LoginScreen from './LoginScreen'
@@ -9,14 +10,20 @@ type AppProps = {
 }
 
 const App: React.FC<AppProps> = props => {
-  const { screen = 'login' } = props
-
   return (
     <Theme>
-      <div>
-        {screen === 'registration' && <RegistrationScreen />}
-        {screen === 'login' && <LoginScreen />}
-      </div>
+      <Router>
+        <div>
+          <Switch>
+            <Route exact path={['/', '/login']}>
+              <LoginScreen />
+            </Route>
+            <Route path="/registration">
+              <RegistrationScreen />
+            </Route>
+          </Switch>
+        </div>
+      </Router>
     </Theme>
   )
 }

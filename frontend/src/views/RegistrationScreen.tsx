@@ -21,16 +21,30 @@ const FormContainerStyled = styled.div`
   justify-content: center;
   align-items: center;
   max-width: 400px;
+
+  .ant-form-item-explain::first-letter {
+    text-transform: capitalize;
+  }
 `
-const CardStyled = styled(Card)``
+const ButtonStyled = styled(Button)`
+  width: 100%;
+`
 
 type RegistrationScreenProps = {}
 
 const RegistrationScreen = (props: RegistrationScreenProps) => {
-  const {} = props
-  // const handleSubmit = (data: object) => {
-  //   console.log(data)
-  // }
+  const validateMessages = {
+    required: '${name} is required!',
+  }
+
+  const handleSubmit = (data: object) => {
+    console.log(data)
+  }
+
+  const handleErrors = (data: object) => {
+    console.log(data)
+  }
+
   return (
     <WelcomeScreen
       background={Background}
@@ -38,34 +52,42 @@ const RegistrationScreen = (props: RegistrationScreenProps) => {
     >
       <LogoStyled src={Logo} />
       <FormContainerStyled>
-        <CardStyled title="Registration form">
-          <Form>
-            <FormItem>
+        <Card title="Create a new account">
+          <Form
+            name="login-form"
+            validateMessages={validateMessages}
+            onFinish={handleSubmit}
+            onFinishFailed={handleErrors}
+          >
+            <FormItem name="username" rules={[{ required: true }]}>
               <Input prefix={<UserOutlined />} placeholder="Username" />
             </FormItem>
-            <FormItem>
+            <FormItem name="email" rules={[{ required: true }]}>
               <Input
                 type="email"
                 prefix={<MailOutlined />}
                 placeholder="E-mail"
               />
             </FormItem>
-            <FormItem>
+            <FormItem name="password" rules={[{ required: true }]}>
               <PasswordInput prefix={<LockOutlined />} placeholder="Password" />
             </FormItem>
-            <FormItem>
+            <FormItem name="password-confirm" rules={[{ required: true }]}>
               <PasswordInput
                 prefix={<LockOutlined />}
                 placeholder="Confirm password"
               />
             </FormItem>
             <FormItem>
-              <Button type="primary" htmlType="submit">
-                Submit
-              </Button>
+              <ButtonStyled type="primary" htmlType="submit">
+                Sign up
+              </ButtonStyled>
+              <span>
+                Already registered? <a href="/login">Log in</a>
+              </span>
             </FormItem>
           </Form>
-        </CardStyled>
+        </Card>
       </FormContainerStyled>
     </WelcomeScreen>
   )

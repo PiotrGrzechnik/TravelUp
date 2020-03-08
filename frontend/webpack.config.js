@@ -7,6 +7,10 @@ module.exports = {
   output: {
     path: path.join(__dirname, '/dist'),
     filename: 'main.js',
+    publicPath: '/',
+  },
+  devServer: {
+    historyApiFallback: true,
   },
   devtool: 'eval-source-map',
   module: {
