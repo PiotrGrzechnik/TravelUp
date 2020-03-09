@@ -1,7 +1,7 @@
 import React from 'react'
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
 
-import Theme from '../style/theme'
+import Theme from 'src/style/theme'
 import LoginScreen from './LoginScreen'
 import RegistrationScreen from './RegistrationScreen'
 

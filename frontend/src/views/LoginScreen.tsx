@@ -3,10 +3,10 @@ import styled from 'styled-components'
 import { Form, Input, Card, Button } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 
-import WelcomeScreen from '../templates/WelcomeScreen'
+import WelcomeScreen from 'src/templates/WelcomeScreen'
 
-const Logo = require('../images/logo.png')
-const Background = require('../images/login-bg.jpg')
+const Logo = require('src/images/logo.png')
+const Background = require('src/images/login-bg.jpg')
 
 const FormItem = Form.Item
 const PasswordInput = Input.Password

@@ -2,5 +2,7 @@ README.md
 node_modules/
 dist/
 features.txt
-travelup1.png
+travelup-userapp.png
+travelup-logo.xcf
 .vscode/settings.json
+frontend/jsconfig.json
