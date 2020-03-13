@@ -1,10 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Form, Input, Card, Button } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
+import { useSelector, useDispatch } from 'react-redux'
+
+import { logInUser } from 'src/modules/user/actions'
+import { UserLoginTypes, StoreState } from 'src/modules/user/reducers'
 
 import WelcomeScreen from 'src/templates/WelcomeScreen'
-
 const Logo = require('src/images/logo.png')
 const Background = require('src/images/login-bg.jpg')
 
@@ -33,16 +36,20 @@ const ButtonStyled = styled(Button)`
 type LoginScreenProps = {}
 
 const LoginScreen = (props: LoginScreenProps) => {
+  const dispatch = useDispatch()
+  const user = useSelector((store: StoreState) => store.user)
+
   const validateMessages = {
     required: '${name} is required!',
   }
 
-  const handleSubmit = (data: object) => {
+  const handleSubmit = (data: UserLoginTypes) => {
     console.log(data)
+    // dispatch(logInUser(data))
   }
 
-  const handleErrors = (data: object) => {
-    console.log(data)
+  const handleErrors = (errors: object) => {
+    console.log(errors)
   }
   return (
     <WelcomeScreen

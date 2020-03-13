@@ -16,4 +16,4 @@ Docker | Nginx
 
 # Testing:
 
-Mocha / Jest / ...
+Mocha / Jest / React Testing Library
