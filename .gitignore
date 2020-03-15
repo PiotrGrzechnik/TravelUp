@@ -1,6 +1,7 @@
 README.md
 node_modules/
 dist/
+build/
 features.txt
 travelup-userapp.png
 travelup-logo.xcf
