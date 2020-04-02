@@ -5,8 +5,8 @@ import { Provider } from 'react-redux'
 import { reducers } from 'src/modules/user/reducers'
 
 import Theme from 'src/style/theme'
-import LoginScreen from './LoginScreen'
-import RegistrationScreen from './RegistrationScreen'
+import LoginView from './LoginView'
+import RegistrationView from './RegistrationView'
 
 const store = createStore(reducers)
 
@@ -20,10 +20,10 @@ const App: React.FC<AppProps> = props => {
           <div>
             <Switch>
               <Route exact path={['/', '/login']}>
-                <LoginScreen />
+                <LoginView />
               </Route>
               <Route path="/registration">
-                <RegistrationScreen />
+                <RegistrationView />
               </Route>
             </Switch>
           </div>

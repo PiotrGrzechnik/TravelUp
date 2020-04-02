@@ -2,8 +2,6 @@ README.md
 node_modules/
 dist/
 build/
-features.txt
-travelup-userapp.png
-travelup-logo.xcf
 .vscode/settings.json
 frontend/jsconfig.json
+server/.env
