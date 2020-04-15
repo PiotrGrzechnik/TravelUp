@@ -1,12 +1,36 @@
 import { Request, Response } from "express";
+import { User, UserInterface } from "../../database/models/user";
 
-const getUser = (req: Request, res: Response) => {
-  res.send("<h1>USER</h1>");
+const getUsers = (req: Request, res: Response) => {
+  User.findAll<User>({})
+    .then((users: Array<User>) => {
+      res.send(users);
+    })
+    .catch((err: Error) => res.status(500).send(err));
 };
 
 const getSpecificUser = (req: Request, res: Response) => {
-  const params = req.params.id;
-  res.send(`<h1>USER ${params}</h1>`);
+  const id = req.params.id;
+
+  User.findByPk<User>(id)
+    .then((user: User | null) => {
+      if (user) {
+        res.send(user);
+      } else {
+        res.status(404).send({ errors: ["User not found"] });
+      }
+    })
+    .catch((err: Error) => res.status(500).json(err));
 };
 
-export { getUser, getSpecificUser };
+const createUser = (req: Request, res: Response) => {
+  const params: UserInterface = req.body;
+
+  User.create<User>(params)
+    .then((user: User) => {
+      res.status(201).send(user);
+    })
+    .catch((err: Error) => res.status(500).send(err));
+};
+
+export { getUsers, getSpecificUser, createUser };
