@@ -9,4 +9,4 @@ const handleBodyRequestParsing = (router: Router) => {
   router.use(parser.json());
 };
 
-export { handleCors, handleBodyRequestParsing };
+export default [handleCors, handleBodyRequestParsing];

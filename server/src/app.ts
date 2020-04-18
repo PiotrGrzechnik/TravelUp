@@ -2,11 +2,11 @@ import express, { Application } from "express";
 
 import { applyRoutes, applyMiddleware } from "./utils";
 import allRoutes from "./modules/allRoutes";
-import middleware from "./middleware";
+import commonMiddleware from "./middleware/common";
 
 const app: Application = express();
 
-applyMiddleware(middleware, app);
+applyMiddleware(commonMiddleware, app);
 applyRoutes(allRoutes, app);
 
 export default app;

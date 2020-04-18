@@ -1,16 +1,18 @@
-import { Sequelize, Model, DataTypes, BuildOptions } from "sequelize";
+import { Model, DataTypes } from "sequelize";
 import sequelize from "../";
 
 export class User extends Model {
   public id!: number;
   public name!: string;
   public email!: string;
-  public pass!: string;
+  public password!: string;
   public readonly createdAt!: Date;
 }
 
 export interface UserInterface {
   name: string;
+  email: string;
+  password: string;
 }
 
 User.init(
@@ -28,7 +30,7 @@ User.init(
       type: new DataTypes.STRING(128),
       allowNull: false,
     },
-    pass: {
+    password: {
       type: new DataTypes.STRING(128),
       allowNull: false,
     },

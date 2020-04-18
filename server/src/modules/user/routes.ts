@@ -1,4 +1,4 @@
-import { getUsers, getSpecificUser, createUser } from "./services";
+import { getUsers, getSpecificUser, loginUser, createUser } from "./services";
 
 import { applyBaseRoute } from "../../utils";
 
@@ -14,7 +14,12 @@ const routes = [
     handler: [getSpecificUser],
   },
   {
-    path: "",
+    path: "/login",
+    method: "post",
+    handler: [loginUser],
+  },
+  {
+    path: "/register",
     method: "post",
     handler: [createUser],
   },
