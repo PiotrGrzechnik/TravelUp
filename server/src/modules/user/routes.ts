@@ -4,7 +4,7 @@ import { applyBaseRoute } from "../../utils";
 
 const routes = [
   {
-    path: "",
+    path: "/list",
     method: "get",
     handler: [getUsers],
   },

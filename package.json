@@ -1,0 +1,9 @@
+{
+  "name": "travel-up",
+  "version": "1.0.0",
+  "scripts": {
+    "front": "cd frontend && npm start",
+    "server": "cd server && npm start",
+    "db": "psql travel_up admin"
+  }
+}

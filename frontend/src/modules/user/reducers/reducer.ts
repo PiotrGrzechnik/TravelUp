@@ -1,12 +1,15 @@
 import { Action, ActionTypes } from '../actions'
-import { UserLoginTypes } from './index'
+
+interface IUserStore {
+  name: string
+}
 
 const initialState = {
   name: null,
 }
 
 export const userLoginReducer = (
-  state: UserLoginTypes = initialState,
+  state: IUserStore = initialState,
   action: Action
 ) => {
   switch (action.type) {

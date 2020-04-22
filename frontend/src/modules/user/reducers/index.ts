@@ -1,14 +1,15 @@
 import { combineReducers } from 'redux'
 import { userLoginReducer } from './reducer'
 
-export interface UserLoginTypes {
+export interface IUserLoginTypes {
   name: string
+  password?: string
 }
 
-export interface StoreState {
-  user: UserLoginTypes
+export interface IStoreState {
+  user: IUserLoginTypes
 }
 
-export const reducers = combineReducers<StoreState>({
+export const reducers = combineReducers<IStoreState>({
   user: userLoginReducer,
 })

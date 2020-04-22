@@ -1,0 +1,72 @@
+{
+  "user": {
+    "/list": {
+      "GET": {
+        "response": {
+          "200": {
+            "users": "string[]"
+          },
+          "500": {
+            "error": "string"
+          }
+        }
+      }
+    },
+    "/:id": {
+      "GET": {
+        "response": {
+          "200": {
+            "name": "string",
+            "email": "string",
+            "country": "string"
+          },
+          "404": {
+            "error": "string"
+          },
+          "500": {
+            "error": "string"
+          }
+        }
+      }
+    },
+    "/login": {
+      "POST": {
+        "request": {
+          "name": "string",
+          "email": "string",
+          "password": "string"
+        },
+        "response": {
+          "200": {
+            "authorized": "boolean",
+            "payload": {
+              "id": "number",
+              "name": "string",
+              "email": "string",
+              "country": "string"
+            }
+          },
+          "401": {
+            "authorized": "boolean",
+            "error": "string"
+          }
+        }
+      }
+    },
+    "/register": {
+      "POST": {
+        "request": {
+          "name": "string",
+          "email": "string",
+          "password": "string",
+          "country": "string"
+        },
+        "response": {
+          "200": {
+            "message": "string"
+          }
+        }
+      }
+    }
+  }
+}

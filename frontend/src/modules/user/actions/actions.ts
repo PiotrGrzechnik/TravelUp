@@ -1,13 +1,13 @@
 import { Dispatch } from 'redux'
 import { ActionTypes } from './actionTypes'
-import { UserLoginTypes } from '../reducers'
+import { IUserLoginTypes } from '../reducers'
 
 export interface UserLoginAction {
   type: ActionTypes.LOG_IN_USER
-  payload: UserLoginTypes
+  payload: IUserLoginTypes
 }
 
-export const logInUser = (data: UserLoginTypes): UserLoginAction => {
+export const logInUser = (data: IUserLoginTypes): UserLoginAction => {
   return {
     type: ActionTypes.LOG_IN_USER,
     payload: data,

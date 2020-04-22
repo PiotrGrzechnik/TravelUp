@@ -1,8 +1,12 @@
-import { Router } from "express";
+import { Request, Response, NextFunction } from "express";
 
-const checkAuth = (req, res, next) => {
-  if (!req.session.user_id) {
-    res.send("You are not authorized to view this page");
+const checkAuth = (req: Request, res: Response, next: NextFunction) => {
+  const sessionId = req.cookies.sessionId;
+  if (sessionId) {
+    const errorMsg = {
+      error: "You are not authorized to view this page",
+    };
+    res.send(errorMsg);
   } else {
     next();
   }

@@ -5,7 +5,7 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { logInUser } from 'src/modules/user/actions'
-import { UserLoginTypes, StoreState } from 'src/modules/user/reducers'
+import { IUserLoginTypes, IStoreState } from 'src/modules/user/reducers'
 
 import WelcomeScreen from 'src/templates/WelcomeScreen'
 const Logo = require('src/images/logo.png')
@@ -37,15 +37,16 @@ type LoginScreenProps = {}
 
 const LoginScreen = (props: LoginScreenProps) => {
   const dispatch = useDispatch()
-  const user = useSelector((store: StoreState) => store.user)
+  const user = useSelector((store: IStoreState) => store.user)
 
   const validateMessages = {
     required: '${name} is required!',
   }
 
-  const handleSubmit = (data: UserLoginTypes) => {
-    console.log(data)
-    // dispatch(logInUser(data))
+  const ruleRequired = { required: true }
+
+  const handleSubmit = async (data: IUserLoginTypes) => {
+    dispatch(logInUser(data))
   }
 
   const handleErrors = (errors: object) => {
@@ -65,10 +66,10 @@ const LoginScreen = (props: LoginScreenProps) => {
             onFinish={handleSubmit}
             onFinishFailed={handleErrors}
           >
-            <FormItem name="username" rules={[{ required: true }]}>
+            <FormItem name="username" rules={[ruleRequired]}>
               <Input prefix={<UserOutlined />} placeholder="Username" />
             </FormItem>
-            <FormItem name="password" rules={[{ required: true }]}>
+            <FormItem name="password" rules={[ruleRequired]}>
               <PasswordInput prefix={<LockOutlined />} placeholder="Password" />
             </FormItem>
             <FormItem>
