@@ -53,10 +53,7 @@ const LoginScreen = (props: LoginScreenProps) => {
     console.log(errors)
   }
   return (
-    <WelcomeScreen
-      background={Background}
-      mask="rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)"
-    >
+    <WelcomeScreen background={Background} mask="rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)">
       <LogoStyled src={Logo} />
       <FormContainerStyled>
         <Card title="Log in to your account">

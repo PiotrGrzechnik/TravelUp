@@ -10,9 +10,7 @@ const Container = styled.div`
   height: 100vh;
   min-height: 630px;
   background-color: ${({ theme }) => theme.colors.primaryAll[1]};
-  background: linear-gradient(
-      ${({ mask }) => (mask ? mask : 'rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)')}
-    )
+  background: linear-gradient(${({ mask }) => (mask ? mask : 'rgba(0, 0, 0, 0), rgba(0, 0, 0, 0)')})
     ${({ background }) => background && `, url(${background})`};
   background-size: cover;
 `

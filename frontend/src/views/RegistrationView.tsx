@@ -46,10 +46,7 @@ const RegistrationScreen = (props: RegistrationScreenProps) => {
   }
 
   return (
-    <WelcomeScreen
-      background={Background}
-      mask="rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)"
-    >
+    <WelcomeScreen background={Background} mask="rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)">
       <LogoStyled src={Logo} />
       <FormContainerStyled>
         <Card title="Create a new account">
@@ -63,20 +60,13 @@ const RegistrationScreen = (props: RegistrationScreenProps) => {
               <Input prefix={<UserOutlined />} placeholder="Username" />
             </FormItem>
             <FormItem name="email" rules={[{ required: true }]}>
-              <Input
-                type="email"
-                prefix={<MailOutlined />}
-                placeholder="E-mail"
-              />
+              <Input type="email" prefix={<MailOutlined />} placeholder="E-mail" />
             </FormItem>
             <FormItem name="password" rules={[{ required: true }]}>
               <PasswordInput prefix={<LockOutlined />} placeholder="Password" />
             </FormItem>
             <FormItem name="password-confirm" rules={[{ required: true }]}>
-              <PasswordInput
-                prefix={<LockOutlined />}
-                placeholder="Confirm password"
-              />
+              <PasswordInput prefix={<LockOutlined />} placeholder="Confirm password" />
             </FormItem>
             <FormItem>
               <ButtonStyled type="primary" htmlType="submit">

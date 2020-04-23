@@ -50,15 +50,18 @@
   "dependencies": {
     "@types/node": "^13.9.0",
     "antd": "^4.0.1",
+    "axios": "^0.19.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-redux": "^7.2.0",
+    "redux-thunk": "^2.3.0",
     "styled-components": "^5.0.1"
   },
   "prettier": {
     "trailingComma": "es5",
     "tabWidth": 2,
     "semi": false,
-    "singleQuote": true
+    "singleQuote": true,
+    "printWidth": 100
   }
 }

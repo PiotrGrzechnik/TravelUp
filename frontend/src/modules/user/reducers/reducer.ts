@@ -8,10 +8,7 @@ const initialState = {
   name: null,
 }
 
-export const userLoginReducer = (
-  state: IUserStore = initialState,
-  action: Action
-) => {
+export const userLoginReducer = (state: IUserStore = initialState, action: Action) => {
   switch (action.type) {
     case ActionTypes.LOG_IN_USER:
       return action.payload
