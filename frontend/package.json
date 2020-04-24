@@ -53,6 +53,7 @@
     "axios": "^0.19.2",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
+    "react-localization": "^1.0.15",
     "react-redux": "^7.2.0",
     "redux-thunk": "^2.3.0",
     "styled-components": "^5.0.1"

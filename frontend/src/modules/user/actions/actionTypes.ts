@@ -1,10 +1,12 @@
-import { ILoginUserAction } from './actions'
+import { ILoginUserAction } from './login.actions'
 
-export enum ActionTypes {
+enum ActionTypes {
   LOG_IN_USER = 'LOG_IN_USER',
   LOG_IN_USER_START = 'LOG_IN_USER_START',
   LOG_IN_USER_SUCCESS = 'LOG_IN_USER_SUCCESS',
   LOG_IN_USER_FAIL = 'LOG_IN_USER_FAIL',
 }
 
-export type Action = ILoginUserAction
+type Action = ILoginUserAction
+
+export { ActionTypes, Action }

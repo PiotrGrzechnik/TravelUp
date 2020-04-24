@@ -1,6 +1,5 @@
 import React from 'react'
 import { DefaultTheme, ThemeProvider } from 'styled-components'
-
 import { blue, grey } from '@ant-design/colors'
 
 const theme: DefaultTheme = {

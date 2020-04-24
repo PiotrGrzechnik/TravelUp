@@ -5,7 +5,7 @@ interface IGenerateTokens {
   refreshToken: string;
 }
 
-export const generateTokens = (params: object): IGenerateTokens => {
+const generateTokens = (params: object): IGenerateTokens => {
   const secret = process.env.TOKEN_SECRET_KEY;
 
   const accessToken = jwt.sign(
@@ -35,3 +35,5 @@ export const generateTokens = (params: object): IGenerateTokens => {
     refreshToken,
   };
 };
+
+export { generateTokens };

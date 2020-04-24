@@ -1,7 +1,7 @@
 import { Model, DataTypes } from "sequelize";
 import sequelize from "../";
 
-export class User extends Model {
+class User extends Model {
   public id!: number;
   public name!: string;
   public email!: string;
@@ -9,7 +9,7 @@ export class User extends Model {
   public readonly createdAt!: Date;
 }
 
-export interface UserInterface {
+interface UserInterface {
   name: string;
   email: string;
   password: string;
@@ -47,3 +47,5 @@ User.sync({ force: false }).then((v) =>
     `[DB] ${v.toString().split(" ")[1]} table synced`
   )
 );
+
+export { User, UserInterface };

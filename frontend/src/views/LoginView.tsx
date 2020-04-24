@@ -52,6 +52,7 @@ const LoginScreen = (props: LoginScreenProps) => {
   const handleErrors = (errors: object) => {
     console.log(errors)
   }
+
   return (
     <WelcomeScreen background={Background} mask="rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)">
       <LogoStyled src={Logo} />
