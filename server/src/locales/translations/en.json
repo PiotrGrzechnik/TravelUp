@@ -1,0 +1,12 @@
+{
+  "middleware": {
+    "notAuthorized": "You are not authorized to view this page"
+  },
+  "user": {
+    "userNotFound": "User not found",
+    "userNotExist": "User with this name or e-mail does not exist",
+    "passwordInvalid": "Password is not valid",
+    "userAlreadyExist": "User with {{key}} {{value}} already exist",
+    "userCreated": "User was created"
+  }
+}

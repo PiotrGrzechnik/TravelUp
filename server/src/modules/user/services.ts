@@ -46,7 +46,7 @@ const getSpecificUser = (req: Request, res: Response) => {
         });
       } else {
         res.status(404).send({
-          error: "User not found",
+          error: req.t("user.userNotFound"),
         });
       }
     })
@@ -65,7 +65,7 @@ const loginUser = async (req: Request, res: Response) => {
       if (!data) {
         return {
           authorized: false,
-          error: "User with this name or e-mail does not exist",
+          error: req.t("user.userNotExist"),
         };
       }
 
@@ -74,7 +74,7 @@ const loginUser = async (req: Request, res: Response) => {
       if (!isPasswordValid) {
         return {
           authorized: false,
-          error: "Password is not valid",
+          error: req.t("user.passwordInvalid"),
         };
       }
 
@@ -132,7 +132,10 @@ const createUser = async (req: Request, res: Response) => {
         dbProps.forEach((el) => {
           if (el.value === userParams[el.key]) {
             userMessage.message.push(
-              `User with ${el.key} ${el.value} already exist`
+              req.t("user.userAlreadyExist", {
+                key: el.key,
+                value: el.value,
+              })
             );
           }
         });
@@ -160,7 +163,7 @@ const createUser = async (req: Request, res: Response) => {
   User.create<User>(newUser)
     .then((createdUser: User) => {
       res.status(201).send({
-        message: "User was created",
+        message: req.t("user.userCreated"),
         data: {
           id: createdUser.id,
           name: createdUser.name,

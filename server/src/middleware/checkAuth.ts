@@ -4,7 +4,7 @@ const checkAuth = (req: Request, res: Response, next: NextFunction) => {
   const sessionId = req.cookies.sessionId;
   if (sessionId) {
     const errorMsg = {
-      error: "You are not authorized to view this page",
+      error: req.t("middleware.notAuthorized"),
     };
     res.send(errorMsg);
   } else {
