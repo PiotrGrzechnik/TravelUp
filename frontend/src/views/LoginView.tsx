@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Form, Input, Card, Button } from 'antd'
+import { Form, Input, Card, Button, notification } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
 
@@ -38,6 +38,25 @@ type LoginScreenProps = {}
 const LoginScreen = (props: LoginScreenProps) => {
   const dispatch = useDispatch()
   const user = useSelector((store: IStoreState) => store.user)
+  const { message, error, loading } = user
+
+  console.log('USER:', user)
+
+  useEffect(() => {
+    if (!error) return
+
+    notification.error({
+      message: error,
+    })
+  }, [error])
+
+  useEffect(() => {
+    if (!message) return
+
+    notification.success({
+      message: message,
+    })
+  }, [message])
 
   const validateMessages = {
     required: '${name} is required!',
@@ -64,8 +83,8 @@ const LoginScreen = (props: LoginScreenProps) => {
             onFinish={handleSubmit}
             onFinishFailed={handleErrors}
           >
-            <FormItem name="username" rules={[ruleRequired]}>
-              <Input prefix={<UserOutlined />} placeholder="Username" />
+            <FormItem name="name" rules={[ruleRequired]}>
+              <Input prefix={<UserOutlined />} placeholder="Name" />
             </FormItem>
             <FormItem name="password" rules={[ruleRequired]}>
               <PasswordInput prefix={<LockOutlined />} placeholder="Password" />

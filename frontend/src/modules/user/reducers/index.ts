@@ -1,9 +1,15 @@
 import { combineReducers } from 'redux'
-import { userLoginReducer } from './reducer'
+import { userLoginReducer } from './login.reducer'
 
 interface IUserLoginTypes {
-  name: string
-  password?: string
+  loading: boolean
+  message: string
+  error: string
+  data: {
+    id: number
+    email: string
+    name: string
+  }
 }
 
 interface IStoreState {

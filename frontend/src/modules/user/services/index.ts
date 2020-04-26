@@ -1,21 +1,15 @@
-import { callApi } from 'src/utils'
-import { t } from 'src/locale/'
+import { callApi, parseError } from 'src/utils'
 
 const UserService = {
-  logIn: data => {
-    const response = callApi
-      .get('user/1')
-      .then(data => {
-        console.log('DATA:', data)
-      })
-      .catch(err => {
-        if (!err.status) {
-          const error = err.toJSON() ? err.toJSON().message : t.userLoginErrorNetwork
-          return {
-            error,
-          }
-        }
-      })
+  logIn: async user => {
+    if (user.name.includes('@')) {
+      user.email = user.name
+      delete user.name
+    }
+    const response = await callApi
+      .post('user/login', user)
+      .then(data => data)
+      .catch(err => parseError(err))
 
     return response
   },

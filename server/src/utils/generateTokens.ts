@@ -15,7 +15,7 @@ const generateTokens = (params: object): IGenerateTokens => {
     },
     secret,
     {
-      expiresIn: "1h",
+      expiresIn: "5d",
     }
   );
 
@@ -26,7 +26,7 @@ const generateTokens = (params: object): IGenerateTokens => {
     },
     secret,
     {
-      expiresIn: "24h",
+      expiresIn: "20d",
     }
   );
 

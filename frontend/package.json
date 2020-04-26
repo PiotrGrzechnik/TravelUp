@@ -51,6 +51,7 @@
     "@types/node": "^13.9.0",
     "antd": "^4.0.1",
     "axios": "^0.19.2",
+    "js-cookie": "^2.2.1",
     "react": "^16.13.0",
     "react-dom": "^16.13.0",
     "react-localization": "^1.0.15",

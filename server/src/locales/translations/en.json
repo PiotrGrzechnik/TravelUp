@@ -5,6 +5,9 @@
   "user": {
     "userNotFound": "User not found",
     "userNotExist": "User with this name or e-mail does not exist",
+    "userNotAuthorized": "You are not authorized",
+    "userNotAuthenticated": "You are not authenticated",
+    "loginSuccess": "You have been logged successfully",
     "passwordInvalid": "Password is not valid",
     "userAlreadyExist": "User with {{key}} {{value}} already exist",
     "userCreated": "User was created"

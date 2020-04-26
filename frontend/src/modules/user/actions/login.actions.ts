@@ -1,16 +1,14 @@
-import { Dispatch } from 'redux'
 import { ActionTypes } from './actionTypes'
 import { IUserLoginTypes } from '../reducers'
 import UserService from '../services'
+import { setAuthToken } from 'src/utils'
 
 interface ILoginUserAction {
   type: ActionTypes.LOG_IN_USER
-  payload: IUserLoginTypes
 }
 
 interface ILoginUserStartAction {
   type: ActionTypes.LOG_IN_USER_START
-  payload: IUserLoginTypes
 }
 
 interface ILoginUserSuccessAction {
@@ -23,9 +21,8 @@ interface ILoginUserFailAction {
   payload: IUserLoginTypes
 }
 
-const logInUserStart = (data: IUserLoginTypes): ILoginUserStartAction => ({
+const logInUserStart = (): ILoginUserStartAction => ({
   type: ActionTypes.LOG_IN_USER_START,
-  payload: data,
 })
 
 const logInUserSuccess = (data: IUserLoginTypes): ILoginUserSuccessAction => ({
@@ -39,9 +36,16 @@ const logInUserFail = (error: IUserLoginTypes): ILoginUserFailAction => ({
 })
 
 const logInUser = (data: IUserLoginTypes) => {
-  return dispatch => {
-    const response = UserService.logIn(data)
-    console.log(response)
+  return async dispatch => {
+    dispatch(logInUserStart())
+
+    const response = await UserService.logIn(data)
+    if (response.statusText === 'OK') {
+      dispatch(logInUserSuccess(response.data))
+      setAuthToken(response.data.tokens)
+    } else {
+      dispatch(logInUserFail(response.data || response))
+    }
   }
 }
 

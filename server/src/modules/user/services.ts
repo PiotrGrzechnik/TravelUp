@@ -3,7 +3,7 @@ import { Op } from "sequelize";
 const bcrypt = require("bcrypt");
 
 import { User, UserInterface } from "../../database/models/user";
-import { generateTokens } from "../../utils";
+import { generateTokens, verifyToken } from "../../utils";
 
 interface IUserCreateMessage {
   exist: boolean;
@@ -21,7 +21,7 @@ interface IUserParams {
   [key: string]: string;
 }
 
-const getUsers = (req: Request, res: Response) => {
+const getUsersList = (req: Request, res: Response) => {
   User.findAll<User>({})
     .then((users: Array<User>) => {
       const usersList = users.map((el) => el.name);
@@ -32,25 +32,32 @@ const getUsers = (req: Request, res: Response) => {
     .catch((error: Error) => res.status(500).send({ error }));
 };
 
-const getSpecificUser = (req: Request, res: Response) => {
-  const id = req.params.id;
+const getUser = (req: Request, res: Response) => {
+  const token = req.cookies.authToken;
+  const id = +req.params.id;
+  const tokenData = verifyToken(token);
 
-  User.findByPk<User>(id)
-    .then((user: User | null) => {
-      if (user) {
-        const { name, email, createdAt } = user;
-        res.send({
-          name,
-          email,
-          createdAt,
-        });
-      } else {
-        res.status(404).send({
-          error: req.t("user.userNotFound"),
-        });
-      }
-    })
-    .catch((error: Error) => res.status(500).json({ error }));
+  if (tokenData.isValid && tokenData.data.id === id) {
+    User.findByPk<User>(id)
+      .then((user: User | null) => {
+        if (user) {
+          const { name, email } = user;
+          res.send({
+            name,
+            email,
+          });
+        } else {
+          res.status(404).send({
+            error: req.t("user.userNotFound"),
+          });
+        }
+      })
+      .catch((error: Error) => res.status(500).json({ error }));
+  } else {
+    res.status(404).send({
+      error: req.t("user.userNotAuthenticated"),
+    });
+  }
 };
 
 const loginUser = async (req: Request, res: Response) => {
@@ -58,7 +65,7 @@ const loginUser = async (req: Request, res: Response) => {
 
   const response: IUserLoginResponse = await User.findOne({
     where: {
-      [Op.or]: [{ name: name }, { email: email }],
+      [Op.or]: [{ name: name || "" }, { email: email || "" }],
     },
   })
     .then(async (data) => {
@@ -87,7 +94,8 @@ const loginUser = async (req: Request, res: Response) => {
       return {
         authorized: true,
         tokens,
-        user: {
+        message: req.t("user.loginSuccess"),
+        data: {
           id: data.id,
           name: data.name,
           email: data.email,
@@ -95,15 +103,18 @@ const loginUser = async (req: Request, res: Response) => {
         },
       };
     })
-    .catch((err) => ({
-      authorized: false,
-      error: err,
-    }));
+    .catch((err) => {
+      console.log(err);
+      return {
+        authorized: false,
+        error: req.t("user.userNotAuthorized"),
+      };
+    });
 
   if (!response.authorized) {
     return res.status(401).send(response);
   } else {
-    return res.status(201).send(response);
+    return res.status(200).send(response);
   }
 };
 
@@ -144,7 +155,6 @@ const createUser = async (req: Request, res: Response) => {
       return userMessage;
     })
     .catch((e) => {
-      console.log("ERROR", e);
       return null;
     });
 
@@ -174,4 +184,4 @@ const createUser = async (req: Request, res: Response) => {
     .catch((error: Error) => res.status(500).send({ error }));
 };
 
-export { getUsers, getSpecificUser, loginUser, createUser };
+export { getUsersList, getUser, loginUser, createUser };

@@ -5,7 +5,10 @@ import config from 'src/config'
 const callApi = axios.create({
   baseURL: config.urlApi,
   timeout: 1000,
-  headers: {},
+  headers: {
+    Accept: 'application/json',
+    'Content-Type': 'application/json',
+  },
 })
 
 export { callApi }

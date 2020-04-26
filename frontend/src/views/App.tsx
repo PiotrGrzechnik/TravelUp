@@ -9,10 +9,13 @@ import { reducers } from 'src/modules/user/reducers'
 import Theme from 'src/style/theme'
 import LoginView from './LoginView'
 import RegistrationView from './RegistrationView'
+import UserView from './UserView'
 
 const store = createStore(reducers, applyMiddleware(thunk))
 
-console.log('STORE:', store.getState())
+if (process.env.NODE_ENV === 'development') {
+  window.store = store.getState()
+}
 
 type AppProps = {}
 
@@ -28,6 +31,9 @@ const App: React.FC<AppProps> = props => {
               </Route>
               <Route path="/registration">
                 <RegistrationView />
+              </Route>
+              <Route path="/user">
+                <UserView />
               </Route>
             </Switch>
           </div>
