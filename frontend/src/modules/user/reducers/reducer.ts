@@ -34,6 +34,31 @@ const userReducer = (state: IUserTypes = initialState, action: IUserAction) => {
         authorized: null,
         data: null,
       }
+    case ActionTypes.REGISTER_USER_START:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        message: null,
+        authorized: null,
+        data: null,
+      }
+    case ActionTypes.REGISTER_USER_SUCCESS:
+      return {
+        ...state,
+        ...action.payload,
+        loading: false,
+        error: null,
+      }
+    case ActionTypes.REGISTER_USER_FAIL:
+      return {
+        ...state,
+        ...action.payload,
+        loading: false,
+        message: null,
+        authorized: null,
+        data: null,
+      }
     case ActionTypes.SET_USER_ID:
       return {
         ...state,

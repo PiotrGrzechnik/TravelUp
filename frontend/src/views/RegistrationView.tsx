@@ -1,8 +1,13 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Form, Input, Card, Button } from 'antd'
+import { Form, Input, Card, Button, notification } from 'antd'
 import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
+import { useHistory } from 'react-router-dom'
 
+import { t } from 'src/locales'
+import { IStoreState } from 'src/modules/user/reducers'
+import { registerUser, IUserRegisterTypes } from 'src/modules/user/actions'
 import WelcomeScreen from 'src/containers/WelcomeScreen'
 
 const Logo = require('src/images/logo.png')
@@ -33,12 +38,43 @@ const ButtonStyled = styled(Button)`
 type RegistrationScreenProps = {}
 
 const RegistrationScreen = (props: RegistrationScreenProps) => {
+  const history = useHistory()
+  const dispatch = useDispatch()
+  const { message, error, loading } = useSelector(
+    (store: IStoreState) => ({
+      message: store.user.message,
+      error: store.user.error,
+      loading: store.user.loading,
+    }),
+    shallowEqual
+  )
+
+  useEffect(() => {
+    error &&
+      notification.error({
+        message: error,
+      })
+  }, [error])
+
+  useEffect(() => {
+    if (!message) return
+
+    notification.success({
+      message: message,
+    })
+
+    setTimeout(() => {
+      history.push('/login')
+    }, 1000)
+  }, [message])
+
   const validateMessages = {
-    required: '${name} is required!',
+    required: '${name}' + t.userNameIsRequired,
   }
 
-  const handleSubmit = (data: object) => {
-    console.log(data)
+  const handleSubmit = (data: IUserRegisterTypes) => {
+    data && delete data['password-confirm']
+    dispatch(registerUser(data))
   }
 
   const handleErrors = (data: object) => {
@@ -49,14 +85,14 @@ const RegistrationScreen = (props: RegistrationScreenProps) => {
     <WelcomeScreen background={Background} mask="rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.2)">
       <LogoStyled src={Logo} />
       <FormContainerStyled>
-        <Card title="Create a new account">
+        <Card title={t.registrationFormTitle}>
           <Form
             name="login-form"
             validateMessages={validateMessages}
             onFinish={handleSubmit}
             onFinishFailed={handleErrors}
           >
-            <FormItem name="username" rules={[{ required: true }]}>
+            <FormItem name="name" rules={[{ required: true }]}>
               <Input prefix={<UserOutlined />} placeholder="Username" />
             </FormItem>
             <FormItem name="email" rules={[{ required: true }]}>
@@ -65,7 +101,24 @@ const RegistrationScreen = (props: RegistrationScreenProps) => {
             <FormItem name="password" rules={[{ required: true }]}>
               <PasswordInput prefix={<LockOutlined />} placeholder="Password" />
             </FormItem>
-            <FormItem name="password-confirm" rules={[{ required: true }]}>
+            <FormItem
+              name="password-confirm"
+              hasFeedback
+              rules={[
+                {
+                  required: true,
+                  message: t.userConfirmYourPassword,
+                },
+                ({ getFieldValue }) => ({
+                  validator(rule, value) {
+                    if (!value || getFieldValue('password') === value) {
+                      return Promise.resolve()
+                    }
+                    return Promise.reject(t.userPasswordConfirmDifferent)
+                  },
+                }),
+              ]}
+            >
               <PasswordInput prefix={<LockOutlined />} placeholder="Confirm password" />
             </FormItem>
             <FormItem>

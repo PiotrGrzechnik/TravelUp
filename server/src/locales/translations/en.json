@@ -9,7 +9,7 @@
     "userNotAuthenticated": "You are not authenticated",
     "loginSuccess": "You have been logged successfully",
     "passwordInvalid": "Password is not valid",
-    "userAlreadyExist": "User with {{key}} {{value}} already exist",
+    "userAlreadyExist": "User with {{value}} already exist",
     "userCreated": "User was created"
   }
 }

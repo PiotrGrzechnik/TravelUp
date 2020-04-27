@@ -6,8 +6,8 @@ import { User, UserInterface } from "../../database/models/user";
 import { generateTokens, verifyToken } from "../../utils";
 
 interface IUserCreateMessage {
-  exist: boolean;
-  message: string[];
+  message?: string;
+  error?: string;
 }
 
 interface IUserLoginResponse {
@@ -128,29 +128,34 @@ const createUser = async (req: Request, res: Response) => {
     },
   })
     .then((data) => {
+      if (!data) return;
+
       const userMessage: IUserCreateMessage = {
-        exist: !!data,
-        message: [],
+        error: null,
       };
 
-      if (data) {
-        const userParams: IUserParams = { name, email };
-        const dbProps = [
-          { key: "name", value: data.name },
-          { key: "email", value: data.email },
-        ];
+      const userParams: IUserParams = {
+        name,
+        email,
+      };
 
-        dbProps.forEach((el) => {
-          if (el.value === userParams[el.key]) {
-            userMessage.message.push(
-              req.t("user.userAlreadyExist", {
-                key: el.key,
-                value: el.value,
-              })
-            );
-          }
-        });
-      }
+      const dbProps: IUserParams = {
+        name: data.name,
+        email: data.email,
+      };
+
+      const valueName =
+        dbProps.name === userParams.name && `name ${dbProps.name}`;
+      const valueEmail =
+        dbProps.email === userParams.email && `email ${dbProps.email}`;
+      const allValues =
+        valueName && valueEmail && `${valueName}, ${valueEmail}`;
+      const singleValue = valueName ? valueName : valueEmail;
+      const formattedValue = allValues || singleValue;
+
+      userMessage.error = req.t("user.userAlreadyExist", {
+        value: formattedValue,
+      });
 
       return userMessage;
     })
@@ -158,7 +163,7 @@ const createUser = async (req: Request, res: Response) => {
       return null;
     });
 
-  if (userMsg.exist) {
+  if (userMsg && userMsg.error) {
     return res.status(400).send(userMsg);
   }
 
