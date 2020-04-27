@@ -1,11 +1,7 @@
 import { ActionTypes } from './actionTypes'
-import { IUserLoginTypes } from '../reducers'
+import { IUserTypes } from '../reducers'
 import UserService from '../services'
 import { setAuthToken } from 'src/utils'
-
-interface ILoginUserAction {
-  type: ActionTypes.LOG_IN_USER
-}
 
 interface ILoginUserStartAction {
   type: ActionTypes.LOG_IN_USER_START
@@ -13,29 +9,29 @@ interface ILoginUserStartAction {
 
 interface ILoginUserSuccessAction {
   type: ActionTypes.LOG_IN_USER_SUCCESS
-  payload: IUserLoginTypes
+  payload: IUserTypes
 }
 
 interface ILoginUserFailAction {
   type: ActionTypes.LOG_IN_USER_FAIL
-  payload: IUserLoginTypes
+  payload: IUserTypes
 }
 
 const logInUserStart = (): ILoginUserStartAction => ({
   type: ActionTypes.LOG_IN_USER_START,
 })
 
-const logInUserSuccess = (data: IUserLoginTypes): ILoginUserSuccessAction => ({
+const logInUserSuccess = (data: IUserTypes): ILoginUserSuccessAction => ({
   type: ActionTypes.LOG_IN_USER_SUCCESS,
   payload: data,
 })
 
-const logInUserFail = (error: IUserLoginTypes): ILoginUserFailAction => ({
+const logInUserFail = (error: IUserTypes): ILoginUserFailAction => ({
   type: ActionTypes.LOG_IN_USER_FAIL,
   payload: error,
 })
 
-const logInUser = (data: IUserLoginTypes) => {
+const logInUser = (data: IUserTypes) => {
   return async dispatch => {
     dispatch(logInUserStart())
 
@@ -49,5 +45,5 @@ const logInUser = (data: IUserLoginTypes) => {
   }
 }
 
-export { ILoginUserAction, ILoginUserStartAction, ILoginUserSuccessAction, ILoginUserFailAction }
+export { ILoginUserStartAction, ILoginUserSuccessAction, ILoginUserFailAction }
 export { logInUserStart, logInUserSuccess, logInUserFail, logInUser }

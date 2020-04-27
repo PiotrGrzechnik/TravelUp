@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Form, Input, Card, Button } from 'antd'
 import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons'
 
-import WelcomeScreen from 'src/templates/WelcomeScreen'
+import WelcomeScreen from 'src/containers/WelcomeScreen'
 
 const Logo = require('src/images/logo.png')
 const Background = require('src/images/registration-bg.jpg')

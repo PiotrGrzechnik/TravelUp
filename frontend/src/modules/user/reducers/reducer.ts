@@ -1,22 +1,14 @@
 import { ActionTypes } from '../actions'
-import { IUserLoginTypes } from './'
+import { IUserTypes } from '.'
+import { initialState } from '.'
 
 interface IUserAction {
   type: string
-  payload: object
+  payload: any
 }
 
-const initialState = {
-  loading: false,
-  message: null,
-  error: null,
-  data: null,
-}
-
-const userLoginReducer = (state: IUserLoginTypes = initialState, action: IUserAction) => {
+const userReducer = (state: IUserTypes = initialState, action: IUserAction) => {
   switch (action.type) {
-    case ActionTypes.LOG_IN_USER:
-      return state
     case ActionTypes.LOG_IN_USER_START:
       return {
         ...state,
@@ -42,9 +34,16 @@ const userLoginReducer = (state: IUserLoginTypes = initialState, action: IUserAc
         authorized: null,
         data: null,
       }
+    case ActionTypes.SET_USER_ID:
+      return {
+        ...state,
+        data: {
+          id: action.payload,
+        },
+      }
     default:
       return state
   }
 }
 
-export { userLoginReducer }
+export { userReducer }

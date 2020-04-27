@@ -5,9 +5,10 @@ import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useSelector, useDispatch } from 'react-redux'
 
 import { logInUser } from 'src/modules/user/actions'
-import { IUserLoginTypes, IStoreState } from 'src/modules/user/reducers'
+import { IUserTypes, IStoreState } from 'src/modules/user/reducers'
 
-import WelcomeScreen from 'src/templates/WelcomeScreen'
+import WelcomeScreen from 'src/containers/WelcomeScreen'
+
 const Logo = require('src/images/logo.png')
 const Background = require('src/images/login-bg.jpg')
 
@@ -40,8 +41,6 @@ const LoginScreen = (props: LoginScreenProps) => {
   const user = useSelector((store: IStoreState) => store.user)
   const { message, error, loading } = user
 
-  console.log('USER:', user)
-
   useEffect(() => {
     if (!error) return
 
@@ -64,7 +63,7 @@ const LoginScreen = (props: LoginScreenProps) => {
 
   const ruleRequired = { required: true }
 
-  const handleSubmit = async (data: IUserLoginTypes) => {
+  const handleSubmit = async (data: IUserTypes) => {
     dispatch(logInUser(data))
   }
 

@@ -1,24 +1,34 @@
 import { combineReducers } from 'redux'
-import { userLoginReducer } from './login.reducer'
 
-interface IUserLoginTypes {
+import { userReducer } from './reducer'
+
+interface IUserTypes {
+  authorized: boolean
   loading: boolean
   message: string
   error: string
   data: {
-    id: number
-    email: string
-    name: string
+    id?: number
+    email?: string
+    name?: string
   }
 }
 
 interface IStoreState {
-  user: IUserLoginTypes
+  user: IUserTypes
+}
+
+const initialState = {
+  authorized: false,
+  loading: false,
+  message: null,
+  error: null,
+  data: null,
 }
 
 const reducers = combineReducers<IStoreState>({
-  user: userLoginReducer,
+  user: userReducer,
 })
 
-export { IUserLoginTypes, IStoreState }
-export { reducers }
+export { IUserTypes, IStoreState }
+export { reducers, initialState }

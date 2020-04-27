@@ -1,8 +1,8 @@
 enum ActionTypes {
-  LOG_IN_USER = 'LOG_IN_USER',
   LOG_IN_USER_START = 'LOG_IN_USER_START',
   LOG_IN_USER_SUCCESS = 'LOG_IN_USER_SUCCESS',
   LOG_IN_USER_FAIL = 'LOG_IN_USER_FAIL',
+  SET_USER_ID = 'SET_USER_ID',
 }
 
 export { ActionTypes }

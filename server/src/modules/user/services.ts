@@ -104,7 +104,6 @@ const loginUser = async (req: Request, res: Response) => {
       };
     })
     .catch((err) => {
-      console.log(err);
       return {
         authorized: false,
         error: req.t("user.userNotAuthorized"),

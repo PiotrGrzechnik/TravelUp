@@ -10,6 +10,7 @@ import Theme from 'src/style/theme'
 import LoginView from './LoginView'
 import RegistrationView from './RegistrationView'
 import UserView from './UserView'
+import PrivateRoute from 'src/containers/PrivateRoute'
 
 const store = createStore(reducers, applyMiddleware(thunk))
 
@@ -27,13 +28,17 @@ const App: React.FC<AppProps> = props => {
           <div>
             <Switch>
               <Route exact path={['/', '/login']}>
-                <LoginView />
+                <PrivateRoute>
+                  <LoginView />
+                </PrivateRoute>
               </Route>
               <Route path="/registration">
                 <RegistrationView />
               </Route>
               <Route path="/user">
-                <UserView />
+                <PrivateRoute>
+                  <UserView />
+                </PrivateRoute>
               </Route>
             </Switch>
           </div>

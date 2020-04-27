@@ -17,6 +17,7 @@ const getAuthToken = () => {
   } catch (error) {
     console.log(error)
   }
+
   return token
 }
 
@@ -24,8 +25,4 @@ const logOut = () => {
   Cookies.remove('authToken')
 }
 
-const authenticationHeader = () => ({
-  Authorization: getAuthToken(),
-})
-
-export { setAuthToken, getAuthToken, logOut, authenticationHeader }
+export { setAuthToken, getAuthToken, logOut }
