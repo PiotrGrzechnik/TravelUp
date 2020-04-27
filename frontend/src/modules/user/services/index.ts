@@ -13,6 +13,16 @@ const UserService = {
 
     return response
   },
+  getUserData: async id => {
+    console.log(id)
+
+    const response = await callApi
+      .get(`user/${id}`)
+      .then(data => data)
+      .catch(err => parseError(err))
+
+    return response
+  },
 }
 
 export default UserService

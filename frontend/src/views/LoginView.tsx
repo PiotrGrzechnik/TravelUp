@@ -2,11 +2,11 @@ import React, { useEffect } from 'react'
 import styled from 'styled-components'
 import { Form, Input, Card, Button, notification } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
-import { useSelector, useDispatch } from 'react-redux'
+import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 
+import { t } from 'src/locales'
 import { logInUser } from 'src/modules/user/actions'
 import { IUserTypes, IStoreState } from 'src/modules/user/reducers'
-
 import WelcomeScreen from 'src/containers/WelcomeScreen'
 
 const Logo = require('src/images/logo.png')
@@ -38,27 +38,31 @@ type LoginScreenProps = {}
 
 const LoginScreen = (props: LoginScreenProps) => {
   const dispatch = useDispatch()
-  const user = useSelector((store: IStoreState) => store.user)
-  const { message, error, loading } = user
+  const { message, error, loading } = useSelector(
+    (store: IStoreState) => ({
+      message: store.user.message,
+      error: store.user.error,
+      loading: store.user.loading,
+    }),
+    shallowEqual
+  )
 
   useEffect(() => {
-    if (!error) return
-
-    notification.error({
-      message: error,
-    })
+    error &&
+      notification.error({
+        message: error,
+      })
   }, [error])
 
   useEffect(() => {
-    if (!message) return
-
-    notification.success({
-      message: message,
-    })
+    message &&
+      notification.success({
+        message: message,
+      })
   }, [message])
 
   const validateMessages = {
-    required: '${name} is required!',
+    required: '${name}' + t.userNameIsRequired,
   }
 
   const ruleRequired = { required: true }

@@ -32,7 +32,7 @@ const App: React.FC<AppProps> = props => {
                   <LoginView />
                 </PrivateRoute>
               </Route>
-              <Route path="/registration">
+              <Route path="/register">
                 <RegistrationView />
               </Route>
               <Route path="/user">

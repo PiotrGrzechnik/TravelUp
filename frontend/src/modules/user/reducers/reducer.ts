@@ -41,6 +41,33 @@ const userReducer = (state: IUserTypes = initialState, action: IUserAction) => {
           id: action.payload,
         },
       }
+    case ActionTypes.GET_USER_DATA_START:
+      return {
+        ...state,
+        loading: true,
+        error: null,
+        message: null,
+        authorized: null,
+        data: null,
+      }
+    case ActionTypes.GET_USER_DATA_SUCCESS:
+      return {
+        ...state,
+        data: {
+          ...action.payload,
+        },
+        loading: false,
+        error: null,
+      }
+    case ActionTypes.GET_USER_DATA_FAIL:
+      return {
+        ...state,
+        ...action.payload,
+        loading: false,
+        message: null,
+        authorized: null,
+        data: null,
+      }
     default:
       return state
   }
