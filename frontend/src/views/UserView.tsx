@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
-import { notification, Layout, Menu, Avatar, Typography, Dropdown } from 'antd'
+import { notification, Layout, Menu, Avatar, Dropdown } from 'antd'
 import styled from 'styled-components'
 
 import { UserOutlined, RocketOutlined, BellOutlined, HomeOutlined } from '@ant-design/icons'
@@ -42,10 +42,15 @@ const HeaderContentStyled = styled(Header)`
 `
 const TitleName = styled.span`
   flex-shrink: 0;
-  margin: 0 30px;
+  margin-left: 30px;
 `
 const AvatarStyled = styled(Avatar)`
+  margin-left: 30px;
   background-color: ${({ theme }) => theme.colors.neutralAll[6]};
+
+  @media (max-width: 576px) {
+    display: none;
+  }
 `
 const NotificationIcon = styled.span`
   font-size: 20px;
@@ -56,8 +61,8 @@ const ContentStyled = styled(Content)`
 `
 
 const renderView = (data: object) => ({
-  start: <StartView />,
-  profile: <UserProfile />,
+  start: <StartView user={data} />,
+  profile: <UserProfile user={data} />,
   trips: <UserTrips />,
 })
 
@@ -134,10 +139,10 @@ const UserView: React.FC<UserViewProps> = props => {
               <BellOutlined />
             </NotificationIcon>
           </Dropdown>
-          <TitleName>Pedrito Rodriguez</TitleName>
           <AvatarStyled size="large" icon={<UserOutlined />} />
+          <TitleName>Pedrito Rodriguez</TitleName>
         </HeaderContentStyled>
-        <ContentStyled>{renderView({})[view]}</ContentStyled>
+        <ContentStyled>{renderView(data)[view]}</ContentStyled>
       </Layout>
     </LayoutStyled>
   )
