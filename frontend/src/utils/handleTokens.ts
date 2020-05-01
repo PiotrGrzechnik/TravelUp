@@ -21,8 +21,8 @@ const getAuthToken = () => {
   return token
 }
 
-const logOut = () => {
+const removeAuthToken = () => {
   Cookies.remove('authToken')
 }
 
-export { setAuthToken, getAuthToken, logOut }
+export { setAuthToken, getAuthToken, removeAuthToken }

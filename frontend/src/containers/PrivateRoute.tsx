@@ -20,6 +20,7 @@ const PrivateRoute = (props: PrivateRouteProps) => {
   const { children } = props
   const dispatch = useDispatch()
   const history = useHistory()
+  const { pathname } = history.location
   const { authorized } = useSelector(
     (store: IStoreState) => ({
       authorized: store.user.authorized,
@@ -27,21 +28,23 @@ const PrivateRoute = (props: PrivateRouteProps) => {
     shallowEqual
   )
 
-  useEffect(() => {
-    const token = getAuthToken()
-    const { pathname } = history.location
-
-    token && dispatch(setUserId(token.id))
-
-    if (token && pathname !== userRoute) {
+  const redirectUser = (isAuthorized: boolean) => {
+    if (isAuthorized && pathname !== userRoute) {
       history.push(userRoute)
-    } else if (!token && pathname !== loginRoute) {
+    } else if (!isAuthorized && pathname !== loginRoute) {
       history.push(loginRoute)
     }
+  }
+
+  useEffect(() => {
+    const token = getAuthToken()
+
+    token && dispatch(setUserId(token.id))
+    redirectUser(token)
   }, [])
 
   useEffect(() => {
-    authorized && history.push(userRoute)
+    redirectUser(authorized)
   }, [authorized])
 
   return <Container {...props}>{children}</Container>

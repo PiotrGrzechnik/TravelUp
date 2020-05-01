@@ -11,6 +11,7 @@ interface IUserTypes {
     id?: number
     email?: string
     name?: string
+    createdAt?: string
   }
 }
 

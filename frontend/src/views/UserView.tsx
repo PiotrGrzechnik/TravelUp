@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import { useSelector, useDispatch, shallowEqual } from 'react-redux'
-import { notification, Layout, Menu, Avatar, Dropdown } from 'antd'
+import { Layout, Menu, Avatar, Dropdown } from 'antd'
 import styled from 'styled-components'
 
 import { UserOutlined, RocketOutlined, BellOutlined, HomeOutlined } from '@ant-design/icons'
 
-import { getUserData } from 'src/modules/user/actions'
+import { getUserData, logOutUser } from 'src/modules/user/actions'
 import { IStoreState } from 'src/modules/user/reducers'
 import { getAuthToken } from 'src/utils'
 import UserProfile from './UserView/UserProfile'
@@ -44,8 +44,10 @@ const TitleName = styled.span`
   flex-shrink: 0;
   margin-left: 30px;
 `
-const AvatarStyled = styled(Avatar)`
+const DropdownAvatarStyled = styled(Dropdown)`
   margin-left: 30px;
+`
+const AvatarStyled = styled(Avatar)`
   background-color: ${({ theme }) => theme.colors.neutralAll[6]};
 
   @media (max-width: 576px) {
@@ -56,33 +58,27 @@ const NotificationIcon = styled.span`
   font-size: 20px;
   cursor: pointer;
 `
+const AvatarIcon = styled.span`
+  font-size: 20px;
+  cursor: pointer;
+`
 const ContentStyled = styled(Content)`
   padding: 40px;
 `
 
-const renderView = (data: object) => ({
+const renderSubView = (data: object) => ({
   start: <StartView user={data} />,
   profile: <UserProfile user={data} />,
   trips: <UserTrips />,
 })
-
-const notificationMenu = (
-  <Menu>
-    <Menu.Item key="0">New app is coming!</Menu.Item>
-    <Menu.Item key="1">Tomorrow is a trip to New Zealand</Menu.Item>
-    <Menu.Item key="2">You have a new message from Melissa</Menu.Item>
-  </Menu>
-)
 
 type UserViewProps = {}
 
 const UserView: React.FC<UserViewProps> = props => {
   const dispatch = useDispatch()
   const [view, setView] = useState('start')
-  const { message, error, data, loading } = useSelector(
+  const { data, loading } = useSelector(
     (store: IStoreState) => ({
-      message: store.user.message,
-      error: store.user.error,
       loading: store.user.loading,
       data: store.user.data,
     }),
@@ -100,19 +96,25 @@ const UserView: React.FC<UserViewProps> = props => {
     userId && dispatch(getUserData(userId))
   }, [])
 
-  useEffect(() => {
-    error &&
-      notification.error({
-        message: error,
-      })
-  }, [error])
+  const handleLogOut = () => {
+    dispatch(logOutUser())
+  }
 
-  useEffect(() => {
-    message &&
-      notification.success({
-        message: message,
-      })
-  }, [message])
+  const notificationMenu = (
+    <Menu>
+      <Menu.Item key="0">New app is coming!</Menu.Item>
+      <Menu.Item key="1">Tomorrow is a trip to New Zealand</Menu.Item>
+      <Menu.Item key="2">You have a new message from Melissa</Menu.Item>
+    </Menu>
+  )
+
+  const userAvatarMenu = (
+    <Menu>
+      <Menu.Item key="0" onClick={handleLogOut}>
+        Log out
+      </Menu.Item>
+    </Menu>
+  )
 
   return (
     <LayoutStyled>
@@ -135,14 +137,22 @@ const UserView: React.FC<UserViewProps> = props => {
       <Layout>
         <HeaderContentStyled>
           <Dropdown overlay={notificationMenu} trigger={['click']} placement="bottomCenter">
-            <NotificationIcon onClick={e => e.preventDefault()}>
+            <NotificationIcon>
               <BellOutlined />
             </NotificationIcon>
           </Dropdown>
-          <AvatarStyled size="large" icon={<UserOutlined />} />
+          <DropdownAvatarStyled
+            overlay={userAvatarMenu}
+            trigger={['click']}
+            placement="bottomCenter"
+          >
+            <AvatarIcon>
+              <AvatarStyled size="large" icon={<UserOutlined />} />
+            </AvatarIcon>
+          </DropdownAvatarStyled>
           <TitleName>Pedrito Rodriguez</TitleName>
         </HeaderContentStyled>
-        <ContentStyled>{renderView(data)[view]}</ContentStyled>
+        <ContentStyled>{renderSubView(data)[view]}</ContentStyled>
       </Layout>
     </LayoutStyled>
   )

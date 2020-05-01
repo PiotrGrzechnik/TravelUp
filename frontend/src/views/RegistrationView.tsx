@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Form, Input, Card, Button, notification } from 'antd'
+import { Form, Input, Card, Button } from 'antd'
 import { UserOutlined, MailOutlined, LockOutlined } from '@ant-design/icons'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
@@ -40,7 +40,7 @@ type RegistrationScreenProps = {}
 const RegistrationScreen = (props: RegistrationScreenProps) => {
   const history = useHistory()
   const dispatch = useDispatch()
-  const { message, error, loading } = useSelector(
+  const { message } = useSelector(
     (store: IStoreState) => ({
       message: store.user.message,
       error: store.user.error,
@@ -50,19 +50,6 @@ const RegistrationScreen = (props: RegistrationScreenProps) => {
   )
 
   useEffect(() => {
-    error &&
-      notification.error({
-        message: error,
-      })
-  }, [error])
-
-  useEffect(() => {
-    if (!message) return
-
-    notification.success({
-      message: message,
-    })
-
     setTimeout(() => {
       history.push('/login')
     }, 1000)

@@ -8,6 +8,8 @@ interface IUserAction {
 }
 
 const userReducer = (state: IUserTypes = initialState, action: IUserAction) => {
+  const { payload } = action
+
   switch (action.type) {
     case ActionTypes.LOG_IN_USER_START:
       return {
@@ -21,17 +23,26 @@ const userReducer = (state: IUserTypes = initialState, action: IUserAction) => {
     case ActionTypes.LOG_IN_USER_SUCCESS:
       return {
         ...state,
-        ...action.payload,
+        ...payload,
+        authorized: true,
         loading: false,
         error: null,
       }
     case ActionTypes.LOG_IN_USER_FAIL:
       return {
         ...state,
-        ...action.payload,
+        ...payload,
         loading: false,
         message: null,
-        authorized: null,
+        authorized: false,
+        data: null,
+      }
+    case ActionTypes.LOG_OUT_USER_SUCCESS:
+      return {
+        ...state,
+        ...payload,
+        loading: false,
+        authorized: false,
         data: null,
       }
     case ActionTypes.REGISTER_USER_START:
@@ -46,14 +57,14 @@ const userReducer = (state: IUserTypes = initialState, action: IUserAction) => {
     case ActionTypes.REGISTER_USER_SUCCESS:
       return {
         ...state,
-        ...action.payload,
+        ...payload,
         loading: false,
         error: null,
       }
     case ActionTypes.REGISTER_USER_FAIL:
       return {
         ...state,
-        ...action.payload,
+        ...payload,
         loading: false,
         message: null,
         authorized: null,
@@ -62,8 +73,9 @@ const userReducer = (state: IUserTypes = initialState, action: IUserAction) => {
     case ActionTypes.SET_USER_ID:
       return {
         ...state,
+        authorized: true,
         data: {
-          id: action.payload,
+          id: payload,
         },
       }
     case ActionTypes.GET_USER_DATA_START:
@@ -72,14 +84,13 @@ const userReducer = (state: IUserTypes = initialState, action: IUserAction) => {
         loading: true,
         error: null,
         message: null,
-        authorized: null,
         data: null,
       }
     case ActionTypes.GET_USER_DATA_SUCCESS:
       return {
         ...state,
         data: {
-          ...action.payload,
+          ...payload,
         },
         loading: false,
         error: null,
@@ -87,7 +98,7 @@ const userReducer = (state: IUserTypes = initialState, action: IUserAction) => {
     case ActionTypes.GET_USER_DATA_FAIL:
       return {
         ...state,
-        ...action.payload,
+        error: payload.error,
         loading: false,
         message: null,
         authorized: null,

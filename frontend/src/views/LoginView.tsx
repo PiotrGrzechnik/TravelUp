@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import styled from 'styled-components'
-import { Form, Input, Card, Button, notification } from 'antd'
+import { Form, Input, Card, Button } from 'antd'
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import { useSelector, shallowEqual, useDispatch } from 'react-redux'
 
@@ -38,28 +38,12 @@ type LoginScreenProps = {}
 
 const LoginScreen = (props: LoginScreenProps) => {
   const dispatch = useDispatch()
-  const { message, error, loading } = useSelector(
+  const { loading } = useSelector(
     (store: IStoreState) => ({
-      message: store.user.message,
-      error: store.user.error,
       loading: store.user.loading,
     }),
     shallowEqual
   )
-
-  useEffect(() => {
-    error &&
-      notification.error({
-        message: error,
-      })
-  }, [error])
-
-  useEffect(() => {
-    message &&
-      notification.success({
-        message: message,
-      })
-  }, [message])
 
   const validateMessages = {
     required: '${name}' + t.userNameIsRequired,

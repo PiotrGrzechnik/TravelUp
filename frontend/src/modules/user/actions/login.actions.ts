@@ -1,7 +1,7 @@
 import { ActionTypes } from './actionTypes'
 import { IUserTypes } from '../reducers'
 import UserService from '../services'
-import { setAuthToken } from 'src/utils'
+import { setAuthToken, removeAuthToken, getAuthToken } from 'src/utils'
 
 interface ILoginUserStartAction {
   type: ActionTypes.LOG_IN_USER_START
@@ -14,6 +14,11 @@ interface ILoginUserSuccessAction {
 
 interface ILoginUserFailAction {
   type: ActionTypes.LOG_IN_USER_FAIL
+  payload: IUserTypes
+}
+
+interface ILogOutUserSuccess {
+  type: ActionTypes.LOG_OUT_USER_SUCCESS
   payload: IUserTypes
 }
 
@@ -45,5 +50,21 @@ const logInUser = (data: IUserTypes) => {
   }
 }
 
-export { ILoginUserStartAction, ILoginUserSuccessAction, ILoginUserFailAction }
-export { logInUserStart, logInUserSuccess, logInUserFail, logInUser }
+const logOutUserSuccess = (message): ILogOutUserSuccess => ({
+  type: ActionTypes.LOG_OUT_USER_SUCCESS,
+  payload: message,
+})
+
+const logOutUser = () => {
+  return dispatch => {
+    removeAuthToken()
+    const token = getAuthToken()
+
+    if (!token) {
+      const message = 'You have been logged out successfully!'
+      dispatch(logOutUserSuccess({ message }))
+    }
+  }
+}
+
+export { logInUser, logOutUser }

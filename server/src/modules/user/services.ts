@@ -41,11 +41,12 @@ const getUser = (req: Request, res: Response) => {
     User.findByPk<User>(id)
       .then((user: User | null) => {
         if (user) {
-          const { id, name, email } = user;
+          const { id, name, email, createdAt } = user;
           res.send({
             id,
             name,
             email,
+            createdAt,
           });
         } else {
           res.status(404).send({
