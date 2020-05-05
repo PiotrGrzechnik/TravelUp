@@ -8,6 +8,7 @@ const t = new LocalizedStrings({
     userNameIsRequired: ' is required!',
     userPasswordConfirmDifferent: 'The two passwords are different!',
     userConfirmYourPassword: 'Please confirm your password!',
+    userBeenSince: 'You have been with us since {days} days.',
   },
 })
 

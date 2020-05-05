@@ -18,6 +18,10 @@ const { Header, Content, Sider } = Layout
 
 const LayoutStyled = styled(Layout)`
   min-height: 100vh;
+
+  .ant-card {
+    margin: 10px;
+  }
 `
 const HeaderMenuStyled = styled(Header)`
   display: flex;
@@ -43,16 +47,16 @@ const HeaderContentStyled = styled(Header)`
 const TitleName = styled.span`
   flex-shrink: 0;
   margin-left: 30px;
+
+  @media (max-width: 576px) {
+    display: none;
+  }
 `
 const DropdownAvatarStyled = styled(Dropdown)`
   margin-left: 30px;
 `
 const AvatarStyled = styled(Avatar)`
   background-color: ${({ theme }) => theme.colors.neutralAll[6]};
-
-  @media (max-width: 576px) {
-    display: none;
-  }
 `
 const NotificationIcon = styled.span`
   font-size: 20px;
@@ -64,6 +68,13 @@ const AvatarIcon = styled.span`
 `
 const ContentStyled = styled(Content)`
   padding: 40px;
+
+  @media (max-width: 400px) {
+    padding: 10px;
+  }
+  @media (max-width: 320px) {
+    padding: 0;
+  }
 `
 
 const renderSubView = (data: object) => ({

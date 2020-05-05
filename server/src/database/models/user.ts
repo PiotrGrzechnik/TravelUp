@@ -23,16 +23,24 @@ User.init(
       primaryKey: true,
     },
     name: {
-      type: new DataTypes.STRING(128),
+      type: DataTypes.STRING(128),
       allowNull: false,
     },
     email: {
-      type: new DataTypes.STRING(128),
+      type: DataTypes.STRING(128),
       allowNull: false,
     },
     password: {
-      type: new DataTypes.STRING(128),
+      type: DataTypes.STRING(128),
       allowNull: false,
+    },
+    gender: {
+      type: DataTypes.ENUM("male", "female"),
+      allowNull: true,
+    },
+    country: {
+      type: DataTypes.STRING(128),
+      allowNull: true,
     },
   },
   {

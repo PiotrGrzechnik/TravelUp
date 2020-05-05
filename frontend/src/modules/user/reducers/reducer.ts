@@ -24,7 +24,6 @@ const userReducer = (state: IUserTypes = initialState, action: IUserAction) => {
       return {
         ...state,
         ...payload,
-        authorized: true,
         loading: false,
         error: null,
       }
@@ -34,7 +33,6 @@ const userReducer = (state: IUserTypes = initialState, action: IUserAction) => {
         ...payload,
         loading: false,
         message: null,
-        authorized: false,
         data: null,
       }
     case ActionTypes.LOG_OUT_USER_SUCCESS:
@@ -89,16 +87,17 @@ const userReducer = (state: IUserTypes = initialState, action: IUserAction) => {
     case ActionTypes.GET_USER_DATA_SUCCESS:
       return {
         ...state,
+        loading: false,
+        error: null,
+        message: null,
         data: {
           ...payload,
         },
-        loading: false,
-        error: null,
       }
     case ActionTypes.GET_USER_DATA_FAIL:
       return {
         ...state,
-        error: payload.error,
+        ...payload,
         loading: false,
         message: null,
         authorized: null,

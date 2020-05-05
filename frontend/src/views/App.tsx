@@ -15,10 +15,6 @@ import Notifications from 'src/containers/Notifications'
 
 const store = createStore(reducers, applyMiddleware(thunk))
 
-if (process.env.NODE_ENV === 'development') {
-  window.store = store.getState()
-}
-
 type AppProps = {}
 
 const App: React.FC<AppProps> = props => {

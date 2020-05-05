@@ -43,16 +43,16 @@ const RegistrationScreen = (props: RegistrationScreenProps) => {
   const { message } = useSelector(
     (store: IStoreState) => ({
       message: store.user.message,
-      error: store.user.error,
-      loading: store.user.loading,
     }),
     shallowEqual
   )
 
   useEffect(() => {
-    setTimeout(() => {
-      history.push('/login')
-    }, 1000)
+    if (message === 'User was created') {
+      setTimeout(() => {
+        history.push('/login')
+      }, 1000)
+    }
   }, [message])
 
   const validateMessages = {
@@ -64,8 +64,8 @@ const RegistrationScreen = (props: RegistrationScreenProps) => {
     dispatch(registerUser(data))
   }
 
-  const handleErrors = (data: object) => {
-    console.log(data)
+  const handleErrors = (errors: object) => {
+    console.log(errors)
   }
 
   return (

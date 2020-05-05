@@ -81,7 +81,7 @@ const LoginScreen = (props: LoginScreenProps) => {
                 Log in
               </ButtonStyled>
               <span>
-                Or <a href="/registration">register now!</a>
+                Or <a href="/register">register now!</a>
               </span>
             </FormItem>
           </Form>
