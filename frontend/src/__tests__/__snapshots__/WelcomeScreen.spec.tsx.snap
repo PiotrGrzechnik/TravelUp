@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WelcomeScreen renders component without crashing 1`] = `
+<styled.div>
+  <h2>
+    Hello!
+  </h2>
+</styled.div>
+`;
