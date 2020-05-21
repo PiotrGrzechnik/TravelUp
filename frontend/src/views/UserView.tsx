@@ -99,11 +99,6 @@ const UserView: React.FC<UserViewProps> = props => {
   useEffect(() => {
     let userId = data && data.id
 
-    if (!userId) {
-      const token = getAuthToken()
-      userId = token ? token.id : null
-    }
-
     userId && dispatch(getUserData(userId))
   }, [])
 

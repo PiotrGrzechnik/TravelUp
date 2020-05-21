@@ -40,7 +40,7 @@ const PrivateRoute = (props: PrivateRouteProps) => {
     const token = getAuthToken()
 
     token && dispatch(setUserId(token.id))
-    redirectUser(token)
+    redirectUser(!!token)
   }, [])
 
   useEffect(() => {

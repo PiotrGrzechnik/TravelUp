@@ -8,6 +8,10 @@
     "jsx": "react",
     "esModuleInterop": true,
     "skipLibCheck": true,
-    "typeRoots": ["./src/custom_typings", "./node_modules/@types"]
+    "typeRoots": ["./src/custom_typings", "./node_modules/@types"],
+    "baseUrl": "./",
+    "paths": {
+      "src/*": ["./src/*"]
+    }
   }
 }

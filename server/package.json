@@ -8,7 +8,7 @@
     "build": "webpack",
     "build:dev": "NODE_ENV=development webpack",
     "build:prod": "NODE_ENV=production webpack",
-    "start": "NODE_ENV=development nodemon src/index.ts"
+    "start": "SET NODE_ENV=development & nodemon src/index.ts"
   },
   "keywords": [],
   "author": "",

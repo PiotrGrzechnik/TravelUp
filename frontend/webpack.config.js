@@ -64,7 +64,7 @@ module.exports = {
   },
   externals: {},
   resolve: {
-    extensions: ['.js', '.ts', '.tsx'],
+    extensions: ['.js', '.ts', '.tsx', '.less'],
     modules: [path.resolve(__dirname, './src'), 'node_modules'],
     alias: {
       src: path.resolve(__dirname, './src'),

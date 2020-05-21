@@ -55,7 +55,7 @@ type UserProfileProps = {
 const UserProfile: React.FC<UserProfileProps> = props => {
   const [isEdit, setIsEdit] = useState(false)
   const { user } = props
-  const avatar = avatars[user.gender]
+  const avatar = user && avatars[user.gender]
 
   const initiaValues = {
     country: user.country,
