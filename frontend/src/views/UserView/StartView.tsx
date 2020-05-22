@@ -35,7 +35,9 @@ const StartView: React.FC<StartViewProps> = props => {
 
   return (
     <Container>
-      <CardMainStyled title={<CardMainTitle>Hello, {username}!</CardMainTitle>}>
+      <CardMainStyled
+        title={<CardMainTitle>{username && <span>Hello, {username}!</span>}</CardMainTitle>}
+      >
         {createdAt && daysFrom && <p>{t.formatString(t.userBeenSince, { days: daysFrom })}</p>}
       </CardMainStyled>
     </Container>

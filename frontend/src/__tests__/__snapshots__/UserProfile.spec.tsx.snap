@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserProfile renders component with user data without crashing 1`] = `
+exports[`UserProfile renders component with empty user data without crashing 1`] = `
 <Fragment>
   <styled.div>
     <Styled(Card)

@@ -7,7 +7,6 @@ import { UserOutlined, RocketOutlined, BellOutlined, HomeOutlined } from '@ant-d
 
 import { getUserData, logOutUser } from 'src/modules/user/actions'
 import { IStoreState } from 'src/modules/user/reducers'
-import { getAuthToken } from 'src/utils'
 import UserProfile from './UserView/UserProfile'
 import UserTrips from './UserView/UserTrips'
 import StartView from './UserView/StartView'

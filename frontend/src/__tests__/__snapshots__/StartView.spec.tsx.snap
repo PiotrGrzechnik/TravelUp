@@ -5,9 +5,11 @@ exports[`StartView pass props correctly 1`] = `
   <Styled(Card)
     title={
       <styled.div>
-        Hello, 
-        Mary
-        !
+        <span>
+          Hello, 
+          Mary
+          !
+        </span>
       </styled.div>
     }
   />
@@ -17,12 +19,7 @@ exports[`StartView pass props correctly 1`] = `
 exports[`StartView renders component without crashing 1`] = `
 <styled.div>
   <Styled(Card)
-    title={
-      <styled.div>
-        Hello, 
-        !
-      </styled.div>
-    }
+    title={<styled.div />}
   />
 </styled.div>
 `;
