@@ -1,16 +1,27 @@
 import React from 'react'
-import Enzyme, { shallow, mount, render } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-import renderer from 'react-test-renderer'
-
-Enzyme.configure({ adapter: new Adapter() })
+import { shallow } from 'enzyme'
 
 import UserProfile from 'src/views/UserView/UserProfile'
 
 describe('UserProfile', () => {
-  test('renders component without crashing', () => {
-    const user = {}
-    const app = renderer.create(<UserProfile user={user} />).toJSON()
+  test('renders component without user data without crashing', () => {
+    const app = shallow(<UserProfile />)
     expect(app).toMatchSnapshot()
+  })
+
+  test('renders component with user data without crashing', () => {
+    const user = {}
+    const app = shallow(<UserProfile user={user} />)
+    expect(app).toMatchSnapshot()
+  })
+
+  test('renders component with user name data without crashing', () => {
+    const user = {
+      name: 'Pedro',
+    }
+
+    const app = shallow(<UserProfile user={user} />)
+    expect(app).toMatchSnapshot()
+    expect(app.text()).toContain(user.name)
   })
 })

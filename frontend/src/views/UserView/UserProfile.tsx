@@ -58,8 +58,8 @@ const UserProfile: React.FC<UserProfileProps> = props => {
   const avatar = user && avatars[user.gender]
 
   const initiaValues = {
-    country: user.country,
-    gender: user.gender,
+    country: user && user.country,
+    gender: user && user.gender,
   }
 
   const ruleRequired = { required: true }

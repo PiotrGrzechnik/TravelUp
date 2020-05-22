@@ -1,70 +1,28 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`StartView pass props correctly 1`] = `
-<div
-  className="sc-AxjAm jhiTqR"
->
-  <div
-    className="ant-card sc-AxirZ ehQSTo ant-card-bordered"
-  >
-    <div
-      className="ant-card-head"
-      style={Object {}}
-    >
-      <div
-        className="ant-card-head-wrapper"
-      >
-        <div
-          className="ant-card-head-title"
-        >
-          <div
-            className="sc-AxiKw jLRykq"
-          >
-            Hello, 
-            Mary
-            !
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="ant-card-body"
-      style={Object {}}
-    />
-  </div>
-</div>
+<styled.div>
+  <Styled(Card)
+    title={
+      <styled.div>
+        Hello, 
+        Mary
+        !
+      </styled.div>
+    }
+  />
+</styled.div>
 `;
 
 exports[`StartView renders component without crashing 1`] = `
-<div
-  className="sc-AxjAm jhiTqR"
->
-  <div
-    className="ant-card sc-AxirZ ehQSTo ant-card-bordered"
-  >
-    <div
-      className="ant-card-head"
-      style={Object {}}
-    >
-      <div
-        className="ant-card-head-wrapper"
-      >
-        <div
-          className="ant-card-head-title"
-        >
-          <div
-            className="sc-AxiKw jLRykq"
-          >
-            Hello, 
-            !
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="ant-card-body"
-      style={Object {}}
-    />
-  </div>
-</div>
+<styled.div>
+  <Styled(Card)
+    title={
+      <styled.div>
+        Hello, 
+        !
+      </styled.div>
+    }
+  />
+</styled.div>
 `;

@@ -1,12 +1,7 @@
 import React from 'react'
-import Enzyme, { shallow, mount, render } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-import { ThemeProvider } from 'styled-components'
-import 'jest-styled-components'
+import { shallow } from 'enzyme'
 
 import WelcomeScreen from 'src/containers/WelcomeScreen'
-
-Enzyme.configure({ adapter: new Adapter() })
 
 describe('WelcomeScreen', () => {
   test('renders component without crashing', () => {

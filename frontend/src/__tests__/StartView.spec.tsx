@@ -1,20 +1,16 @@
 import React from 'react'
-import Enzyme, { shallow, mount, render } from 'enzyme'
-import Adapter from 'enzyme-adapter-react-16'
-import renderer from 'react-test-renderer'
-
-Enzyme.configure({ adapter: new Adapter() })
+import { shallow } from 'enzyme'
 
 import StartView from 'src/views/UserView/StartView'
 
 describe('StartView', () => {
   test('renders component without crashing', () => {
-    const app = renderer.create(<StartView />).toJSON()
+    const app = shallow(<StartView />)
     expect(app).toMatchSnapshot()
   })
 
   test('pass props correctly', () => {
-    const app = renderer.create(<StartView user={{ name: 'Mary' }} />).toJSON()
+    const app = shallow(<StartView user={{ name: 'Mary' }} />)
     expect(app).toMatchSnapshot()
   })
 

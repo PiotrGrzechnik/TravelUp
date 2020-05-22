@@ -1,101 +1,101 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`UserProfile renders component without crashing 1`] = `
-<div
-  className="sc-AxjAm kUtHQi"
->
-  <div
-    className="ant-card sc-AxirZ hUzuQU ant-card-bordered"
-  >
-    <div
-      className="ant-card-head"
-      style={Object {}}
+exports[`UserProfile renders component with user data without crashing 1`] = `
+<Fragment>
+  <styled.div>
+    <Styled(Card)
+      title={
+        <styled.img
+          src=""
+        />
+      }
     >
-      <div
-        className="ant-card-head-wrapper"
-      >
-        <div
-          className="ant-card-head-title"
-        >
-          <img
-            className="sc-AxiKw jA-dUxj"
-            src=""
-          />
+      <styled.p />
+      <styled.p />
+    </Styled(Card)>
+    <Styled(Card)
+      title={
+        <div>
+          User Info 
+          <Button
+            block={false}
+            ghost={false}
+            htmlType="button"
+            loading={false}
+            onClick={[Function]}
+          >
+            Edit
+          </Button>
         </div>
-      </div>
-    </div>
-    <div
-      className="ant-card-body"
-      style={Object {}}
+      }
     >
-      <p
-        className="sc-AxhUy gYyJZg"
-      />
-      <p
-        className="sc-AxhUy gYyJZg"
-      />
-    </div>
-  </div>
-  <div
-    className="ant-card sc-AxhCb bKdAJu ant-card-bordered"
-  >
-    <div
-      className="ant-card-head"
-      style={Object {}}
-    >
-      <div
-        className="ant-card-head-wrapper"
-      >
-        <div
-          className="ant-card-head-title"
-        >
-          <div>
-            User Info 
-            <button
-              className="ant-btn"
-              onClick={[Function]}
-              type="button"
-            >
-              <span>
-                Edit
-              </span>
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div
-      className="ant-card-body"
-      style={Object {}}
-    >
-      <div
-        className="ant-descriptions"
-      >
-        <div
-          className="ant-descriptions-view"
-        >
-          <table>
-            <tbody>
-              <tr
-                className="ant-descriptions-row"
-              >
-                <td
-                  className="ant-descriptions-item"
-                  colSpan={3}
-                >
-                  <span
-                    className="ant-descriptions-item-content"
-                  >
-                    Country
-                    Gender
-                  </span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+      <Descriptions>
+        <styled.div>
+          <Styled(DescriptionsItem)
+            label="Country"
+          >
+            Country
+          </Styled(DescriptionsItem)>
+          <Styled(DescriptionsItem)
+            label="Gender"
+          >
+            Gender
+          </Styled(DescriptionsItem)>
+        </styled.div>
+      </Descriptions>
+    </Styled(Card)>
+  </styled.div>
+</Fragment>
 `;
+
+exports[`UserProfile renders component with user name data without crashing 1`] = `
+<Fragment>
+  <styled.div>
+    <Styled(Card)
+      title={
+        <styled.img
+          src=""
+        />
+      }
+    >
+      <styled.p>
+        Pedro
+      </styled.p>
+      <styled.p />
+    </Styled(Card)>
+    <Styled(Card)
+      title={
+        <div>
+          User Info 
+          <Button
+            block={false}
+            ghost={false}
+            htmlType="button"
+            loading={false}
+            onClick={[Function]}
+          >
+            Edit
+          </Button>
+        </div>
+      }
+    >
+      <Descriptions>
+        <styled.div>
+          <Styled(DescriptionsItem)
+            label="Country"
+          >
+            Country
+          </Styled(DescriptionsItem)>
+          <Styled(DescriptionsItem)
+            label="Gender"
+          >
+            Gender
+          </Styled(DescriptionsItem)>
+        </styled.div>
+      </Descriptions>
+    </Styled(Card)>
+  </styled.div>
+</Fragment>
+`;
+
+exports[`UserProfile renders component without user data without crashing 1`] = `<Fragment />`;
