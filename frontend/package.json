@@ -67,7 +67,7 @@
   "dependencies": {
     "@babel/preset-typescript": "^7.9.0",
     "antd": "^4.0.1",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "jest-cli": "^26.0.1",
     "js-cookie": "^2.2.1",
     "react": "^16.13.0",
